@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Search() {
+function Search({onSearchFilter}) {
+  const [search, newSearch] = useState("");
+
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    onSearchFilter(search)
+    newSearch("") //to clear form
+  }
+
+  function handleSearch(addedSearch) {
+    newSearch(addedSearch);
   }
 
   return (
@@ -12,8 +20,8 @@ function Search() {
         type="text"
         id="search"
         placeholder="search free stuff"
-        value={""}
-        onChange={(e) => console.log(e.target.value)}
+        value={search}
+        onChange={(e) => handleSearch(e.target.value)}
       />
       <button type="submit">🔍</button>
     </form>
@@ -21,3 +29,6 @@ function Search() {
 }
 
 export default Search;
+
+//onSubmit to grab a specific card?
+//handleSubmit needs to be onSubmit within the button.
